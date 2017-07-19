@@ -5,3 +5,4 @@ App for tracking D&amp;D sessions in Chibi's Sigil
 * Tracking of Session Dates and Times
 * Find out how often parties and people are playing
 * Create Polls to find out time availability
+* Poll results should be able to be updated and changed
