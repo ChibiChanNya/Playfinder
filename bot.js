@@ -16,7 +16,8 @@ const token = process.env.TOKEN;
 // from Discord _after_ ready is emitted
 client.on('ready', () => {
   console.log('I am ready!');
- // message.channel.send("Hai!"); Think this would be cute to add...
+  //console.log(client.channels);
+  client.channels.find("name", "sigil").send('Hai Everyone! ^_^');
 });
 
 // Create an event listener for messages
