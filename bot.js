@@ -41,5 +41,24 @@ client.on('message', message => {
   }
 });
 
+//dice rolling function
+var dice = function(num, sides, mod) {
+    let rolls = [];
+    function add(a, b) {
+        return a + b;
+    }
+    for (i = 0; i < num; i++) {
+        rolls.push(Math.ceil(Math.random() * sides)); 
+    }
+    return {results: rolls, total: rolls.reduce(add, 0) + mod};
+}; 
+
+console.log(dice(3, 12, 1));
+
+/* if (message.content === '~roll')
+    //find the first number in the string, pass as num
+    //find the second number, pass as side
+     message.channel.send(dice(num, side)); */
+
 // Log our bot in
 client.login(token);
