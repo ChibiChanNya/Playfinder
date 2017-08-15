@@ -12,6 +12,30 @@ const client = new Discord.Client();
 // The token of your bot - https://discordapp.com/developers/applications/me
 const token = process.env.TOKEN;
 
+//Command prefix
+var prefix = ".";
+
+//Command List
+var command_list = {roll: performRolls};
+
+//dice rolling function
+var dice = function(num, sides, mod) {
+  let rolls = [];
+  function add(a, b) {
+      return a + b;
+  }
+  for (i = 0; i < num; i++) {
+      rolls.push(Math.ceil(Math.random() * sides)); 
+  }
+  return {results: rolls, total: rolls.reduce(add, 0) + mod};
+};
+
+var performRolls = function(params){
+  //TODO: Get NUM, SIDES and MOD from the params
+  let rolls = roll(num, sides, mod);
+  return "ROLLS: "+ rolls.results + "\n RESULT:" + rolls.total;
+}
+
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
 client.on('ready', () => {
@@ -39,21 +63,13 @@ client.on('message', message => {
   if (message.content === '_hugs D20-Chan_'){
     message.channel.send('-^_^-');
   }
+
+  if( message.content[0] === prefix){
+    ///TODO: SEND PARAMS TO FUNCTION
+  }
 });
 
-//dice rolling function
-var dice = function(num, sides, mod) {
-    let rolls = [];
-    function add(a, b) {
-        return a + b;
-    }
-    for (i = 0; i < num; i++) {
-        rolls.push(Math.ceil(Math.random() * sides)); 
-    }
-    return {results: rolls, total: rolls.reduce(add, 0) + mod};
-}; 
-
-console.log(dice(3, 12, 1));
+ 
 
 /* if (message.content === '~roll')
     //find the first number in the string, pass as num
