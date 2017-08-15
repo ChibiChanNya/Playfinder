@@ -27,26 +27,29 @@ var dice = function(num, sides, mod) {
   return {results: rolls, total: rolls.reduce(add, 0) + mod};
 };
 
-var performRolls = function(commandContent){
-    let num = commandContent.split("d")[0];
-    let sides,
-        mod;
+var performRolls = function(commandContent='1d20+0'){
+    let splitContent = commandContent.split("d");
+    let num = splitContent[0];
+    let sides = 0;
+    let mod = 0;
   if (commandContent.indexOf("+")){
-     sides = commandContent.split("d")[1].split("+")[0];
-     mod = commandContent.split("d")[1].split("+")[1];
+     sides = parseInt(splitContent[1].split("+")[0]);
+     mod = parseInt(splitContent[1].split("+")[1]);
   }
   else if (commandContent.indexOf("-")){
-     sides = commandContent.split("d")[1].split("-")[0];
-     mod = commandContent.split("d")[1].split("-")[1]; //need to redo parseInt so this is minus
+     sides = parseInt(splitContent[1].split("-")[0]);
+     mod = parseInt(splitContent[1].split("-")[1]) * -1;
   }
   else {
-     sides = commandContent.split("d")[1];
-     mod = 0;
+     sides = parseInt(splitContent[1]);
+     mod = parseInt(0);
   }
-  num = parseInt(num);
-  sides = parseInt(sides);
-  mod = parseInt(mod);
   let rolls = dice(num, sides, mod);
+  console.log(splitContent);
+  console.log(splitContent[1].split("-")[1]);
+  console.log(splitContent[1].split("-")[1] * -1); //works
+  console.log(rolls);
+  console.log(mod); //NaN...must be a scope issue...
   return "ROLLS: "+ rolls.results + "\n RESULT:" + rolls.total; 
 }
 
@@ -85,9 +88,9 @@ client.on('message', message => {
     message.content.toLowerCase();
     let commandName = message.content.substr(1).split(" ")[0];
     let commandContent = message.content.substr(1).split(" ")[1];
-    console.log(commandList); //returns {roll: [function: performRolls]}
-    console.log(commandName); //works properly..
-    console.log(commandList.commandName); //this is undefined for some reason....
+   // console.log(commandList); //returns {roll: [function: performRolls]}
+   // console.log(commandName); //works properly..
+    message.channel.send(commandList[commandName](commandContent)); //this is undefined for some reason....
   }
 });
 
