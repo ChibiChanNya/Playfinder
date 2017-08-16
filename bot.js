@@ -2,59 +2,18 @@ require('dotenv').config({path:__dirname+'/token.env'});
 /*
   A ping pong bot, whenever you send "ping", it replies "pong".
 */
-
 // Import the discord.js module
 const Discord = require('discord.js');
-
+// Import the command functions
+const Commands = require('./functions.js');
 // Create an instance of a Discord client
 const client = new Discord.Client();
-
 // The token of your bot - https://discordapp.com/developers/applications/me
 const token = process.env.TOKEN;
-
 //Command prefix
-var prefix = ".";
-
-//dice rolling function
-var dice = function(num, sides, mod) {
-  let rolls = [];
-  function add(a, b) {
-      return a + b;
-  }
-  for (i = 0; i < num; i++) {
-      rolls.push(Math.ceil(Math.random() * sides)); 
-  }
-  return {results: rolls, total: rolls.reduce(add, 0) + mod};
-};
-
-var performRolls = function(commandContent='1d20+0'){
-    let splitContent = commandContent.split("d");
-    let num = splitContent[0];
-    let sides = 0;
-    let mod = 0;
-  if (commandContent.indexOf("+")){
-     sides = parseInt(splitContent[1].split("+")[0]);
-     mod = parseInt(splitContent[1].split("+")[1]);
-  }
-  else if (commandContent.indexOf("-")){
-     sides = parseInt(splitContent[1].split("-")[0]);
-     mod = parseInt(splitContent[1].split("-")[1]) * -1;
-  }
-  else {
-     sides = parseInt(splitContent[1]);
-     mod = parseInt(0);
-  }
-  let rolls = dice(num, sides, mod);
-  console.log(splitContent);
-  console.log(splitContent[1].split("-")[1]);
-  console.log(splitContent[1].split("-")[1] * -1); //works
-  console.log(rolls);
-  console.log(mod); //NaN...must be a scope issue...
-  return "ROLLS: "+ rolls.results + "\n RESULT:" + rolls.total; 
-}
-
+const prefix = ".";
 //Command List
-var commandList = {roll: performRolls};
+const commandList = {roll: Commands.performRolls};
 
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
