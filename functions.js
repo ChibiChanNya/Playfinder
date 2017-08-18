@@ -1,5 +1,5 @@
 module.exports={    
-    // Wrapper for Dice roller, verifies parameters and aprses response.
+    // Wrapper for Dice roller, verifies parameters and parses response.
     performRolls: function(commandContent='1d20+0'){
         let splitContent = commandContent.split("d");
         let num = splitContent[0];
