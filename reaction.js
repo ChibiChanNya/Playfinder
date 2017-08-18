@@ -3,23 +3,23 @@ module.exports = {
       switch (commandContent) {
     
         case 'ping':
-        message.channel.send('pong');
+        return 'pong';
         break;
 
         case 'we need...':
-        message.channel.send('CAPTAIN THEORYCRAFT!');
+        return 'CAPTAIN THEORYCRAFT!';
         break;
     
         case 'i got a crit':
-        message.channel.send('Yay! ^_^');
+        return 'Yay! ^_^';
         break;
 
         case 'd20-chan is cute':
-        message.channel.send('Teehee ^-^');
+        return 'Teehee ^-^';
         break;
     
         case '_hugs d20-chan_':
-        message.channel.send('-^_^-');
+        return '-^_^-';
         break;
 
         default:
