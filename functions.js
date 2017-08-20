@@ -21,7 +21,13 @@ module.exports={
         let calcString= rolls.results.reduce( (a,b)=> a.toString()+" + "+b.toString());
         calcString = (mod<0)? calcString + " - "+ Math.abs(mod): calcString + " + " +mod;
         return "ROLLS: "+ rolls.results + "\nCALC: "+calcString+"\nRESULT: " + rolls.total; 
-    }
+    },
+
+    greeting: function(commandContent=null) {
+        let name = commandContent;
+        if (name) {
+        return "\Hai " + name + "! ^_^"; 
+    }}
 };
 
 //dice rolling function
@@ -35,5 +41,4 @@ let dice= function(num, sides, mod) {
     }
     return {results: rolls, total: rolls.reduce(add, 0) + mod};
 }
-
 

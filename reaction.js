@@ -1,5 +1,6 @@
 module.exports = {
-  reaction: function () {
+  reaction: function (commandContent) {
+      commandContent = commandContent.toLowerCase();
       switch (commandContent) {
     
         case 'ping':
@@ -23,7 +24,7 @@ module.exports = {
         break;
 
         default:
-        return " ";
+        return null;
 
   }
 }};

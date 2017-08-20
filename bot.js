@@ -15,7 +15,7 @@ const token = process.env.TOKEN;
 //Command prefix
 const prefix = ".";
 //Command List
-const commandList = {roll: Commands.performRolls};
+const commandList = {roll: Commands.performRolls, greet: Commands.greeting};
 
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
@@ -35,8 +35,10 @@ client.on('message', message => {
     message.channel.send(commandList[commandName](commandContent)); 
   } else {
     //It's a text reaction
-    message.channel.send(Reaction.reaction(message.content));
-  }
+    let response = Reaction.reaction(message.content);
+    if (response) {
+        message.channel.send(response);
+  }}
 });
 
 // Log our bot in
